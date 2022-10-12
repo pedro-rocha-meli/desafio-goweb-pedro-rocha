@@ -23,9 +23,9 @@ func NewRepository(db []domain.Ticket) Repository {
 
 func (r *repository) GetAllTickets() ([]domain.Ticket, error) {
 	
-	// if len(r.db) == 0 {
-	// 	return []domain.Ticket{}, fmt.Errorf("empty list of tickets")
-	// }
+	if len(r.db) == 0 {
+		return []domain.Ticket{}, fmt.Errorf("empty list of tickets")
+	}
 
 	return r.db, nil
 }
@@ -52,7 +52,7 @@ func (r *repository) GetAveragePeopleByDestination(destination string) (int, err
 	var ticketsDest []domain.Ticket
 
 	if len(r.db) == 0 {
-		return 1, fmt.Errorf("empty list of tickets")
+		return len(ticketsDest), fmt.Errorf("empty list of tickets")
 	}
 
 	for _, t := range r.db {
